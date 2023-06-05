@@ -1,12 +1,3 @@
-//
-// Created by Pawel on 31.05.2023.
-//
-
-#ifndef UNTITLED_SCREENSELECTOR_H
-#define UNTITLED_SCREENSELECTOR_H
-
-#endif //UNTITLED_SCREENSELECTOR_H
-
 #include <SDL.h>
 #include <windows.h>
 #include <iostream>
