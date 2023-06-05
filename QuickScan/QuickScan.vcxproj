@@ -137,6 +137,8 @@
     <ClCompile Include="QuickScan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clippboardmanager.h" />
+    <ClInclude Include="ocrinit.h" />
     <ClInclude Include="screenselector.h" />
     <ClInclude Include="screenshotprovider.h" />
   </ItemGroup>

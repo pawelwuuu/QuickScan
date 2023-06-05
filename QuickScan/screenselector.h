@@ -1,6 +1,10 @@
 #include <SDL.h>
 #include <windows.h>
 #include <iostream>
+#include <math.h>
+
+
+
 
 typedef struct {
     int x, y, width, height;
@@ -32,7 +36,7 @@ Cordinates getCordinates() {
 
     // Draw a semi-transparent overlay rectangle on the entire screen
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128); // Przyciemniony kolor (RGBA: 0, 0, 0, 128)
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128);
     SDL_Rect overlayRect = { 0, 0, desktopWidth, desktopHeight };
     SDL_RenderFillRect(renderer, &overlayRect);
 
@@ -49,8 +53,10 @@ Cordinates getCordinates() {
     bool quit = false;
     SDL_Event event;
 
-    SDL_Rect drawingRect = { 0, 0, 0, 0 }; // Pocz¹tkowe wartoœci prostok¹ta
+    SDL_Rect drawingRect = { 0, 0, 0, 0 }; // Initial rectangle values
     SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, desktopWidth, desktopHeight);
+
+    int mouseX, mouseY;
 
     while (!quit) {
         while (SDL_PollEvent(&event)) {
@@ -58,51 +64,65 @@ Cordinates getCordinates() {
                 quit = true;
             }
             else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
-                // Pocz¹tek rysowania prostok¹ta
+                // Start drawing the rectangle
                 drawingRect.x = event.button.x;
                 drawingRect.y = event.button.y;
             }
             else if (event.type == SDL_MOUSEMOTION && event.motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-                // Aktualizacja rozmiaru prostok¹ta podczas ruchu myszy
+                // Update the rectangle size during mouse movement
                 drawingRect.w = event.motion.x - drawingRect.x;
                 drawingRect.h = event.motion.y - drawingRect.y;
             }
             else if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
-                // Koniec rysowania prostok¹ta
+                // End drawing the rectangle
                 drawingRect.w = event.button.x - drawingRect.x;
                 drawingRect.h = event.button.y - drawingRect.y;
                 quit = true;
             }
+
+            mouseX = event.button.x;
+            mouseY = event.button.y;
         }
 
         SDL_SetRenderTarget(renderer, texture);
         SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255);
         SDL_RenderClear(renderer);
 
-        // Renderowanie przyciemnionego t³a
+        // Render the darkened overlay
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 128);
         SDL_RenderFillRect(renderer, &overlayRect);
 
-        // Renderowanie t³a z ciemniejszym kolorem
+        // Render the background with a darker color
         SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
         SDL_RenderFillRect(renderer, &rect1);
 
-        // Renderowanie prostok¹ta rysowanego przez mysz
+        // Render the rectangle drawn by the mouse
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderDrawRect(renderer, &drawingRect);
+        SDL_RenderFillRect(renderer, &drawingRect);
 
-        // Prze³¹czanie na renderowanie na ekranie
+        // Switch back to rendering on the screen
         SDL_SetRenderTarget(renderer, NULL);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
     }
 
-    // Zniszcz teksturê i inne zasoby
+    // Destroy the texture and other resources
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return Cordinates{ drawingRect.x, drawingRect.y, drawingRect.w, drawingRect.h };
+    // Checking type of selection and correcting data
+    if (drawingRect.x > mouseX) {
+        drawingRect.x = mouseX;
+    }
+
+    if (drawingRect.y > mouseY) {
+        drawingRect.y = mouseY;
+    }
+
+    return Cordinates{ drawingRect.x, drawingRect.y, abs(drawingRect.w), abs(drawingRect.h) };
 }
+
+
