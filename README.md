@@ -32,12 +32,6 @@ The QuickScan app is a lightweight desktop application that allows you to captur
 5. Once you have the training files, create a folder in your application directory and name it `tessdata`. Place the downloaded training files (e.g., `eng.traineddata` for English language) into this `tessdata` folder.
 
 6. Set up the TESSDATA_PREFIX environment variable to point to the `tessdata` folder. This variable tells Tesseract where to find the training files. The exact process for setting environment variables depends on your operating system.
-
-   - For Linux/macOS:
-     Open a terminal and run the following command:
-     ```
-     export TESSDATA_PREFIX=/path/to/your_application/tessdata
-     ```
      
    - For Windows:
      Open the System Properties window, go to the "Advanced" tab, and click on the "Environment Variables" button. In the "System variables" section, click "New" to create a new variable with the name `TESSDATA_PREFIX` and the value set to the path of your `tessdata` folder.
