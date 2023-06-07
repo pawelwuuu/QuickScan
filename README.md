@@ -19,6 +19,15 @@ The QuickScan app is a lightweight desktop application that allows you to captur
 
 ![Opis alternatywny](example.gif)
 
+## Requirements
+
+To run this application, you need to meet the following requirements:
+
+- Operating System: Windows
+- Architecture: 64-bit
+- Tesseract Training Files: For accurate text recognition, the application requires Tesseract training files specific to the languages you intend to use. You can download the training files for your desired languages from the [Tesseract GitHub repository](https://github.com/tesseract-ocr/tessdata) or other reliable sources.
+
+
 ## Installation
 
 1. Go to the [Releases](https://github.com/your_username/your_application/releases) page.
