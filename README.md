@@ -17,6 +17,9 @@ The QuickScan app is a lightweight desktop application that allows you to captur
 4. The captured image will be processed by OCR, and the extracted text will be automatically copied to your clipboard.
 5. You can now paste the extracted text into any desired application or document.
 
+![Opis alternatywny](example.gif)
+
+
 ## Credits
 
 The QuickScan app is developed by Paweł Wójcik.
