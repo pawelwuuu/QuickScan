@@ -23,7 +23,7 @@ The QuickScan app is a lightweight desktop application that allows you to captur
 
 1. Go to the [Releases](https://github.com/your_username/your_application/releases) page.
 
-2. Download the latest release package (`your_application-vX.X.X.zip` or `your_application-vX.X.X.tar.gz`) from the list of available releases.
+2. Download the latest release package from the list of available releases.
 
 3. Extract the downloaded package to a desired location on your computer.
 
