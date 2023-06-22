@@ -3,9 +3,6 @@
 #include <iostream>
 #include <math.h>
 
-
-
-
 typedef struct {
     int x, y, width, height;
 } Cordinates;
