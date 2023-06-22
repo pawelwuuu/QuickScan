@@ -30,7 +30,7 @@ To run this application, you need to meet the following requirements:
 
 ## Installation
 
-1. Go to the [Releases](https://github.com/your_username/your_application/releases) page.
+1. Go to the [Releases](https://github.com/pawelwuuu/QuickScan/releases) page.
 
 2. Download the latest release package from the list of available releases.
 
